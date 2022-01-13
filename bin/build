@@ -1,0 +1,23 @@
+#!/bin/bash
+
+docker context use default
+
+root="$(pwd)"
+
+# build the cron
+cd "${root}/build/cron"
+pwd
+docker build --rm -t ghcr.io/ftpcory/docker-wordpress:cron .
+docker push ghcr.io/ftpcory/docker-wordpress:cron
+
+# build the application servers
+cd "${root}/build/web"
+pwd
+docker build --rm -t ghcr.io/ftpcory/docker-wordpress:web .
+docker push ghcr.io/ftpcory/docker-wordpress:web
+
+# build the front end
+cd "${root}/build/front"
+pwd
+docker build --rm -t ghcr.io/ftpcory/docker-wordpress:front .
+docker push ghcr.io/ftpcory/docker-wordpress:front
