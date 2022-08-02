@@ -4,7 +4,7 @@ x-logging: &logging
   logging:
     options:
       max-size: "200k"
-      max-file: "3"
+      max-file: "1"
 
 services:
   front:
@@ -28,8 +28,8 @@ services:
     <<: *logging
     image  : mariadb:10.4
     restart: unless-stopped
-    depends_on:
-      - loki
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
     volumes:
       - db-data:/var/lib/mysql
 

@@ -10,9 +10,6 @@ COPY config/cron-wordpress /app/cron-wordpress
 COPY dotfiles/.* /root/
 COPY scripts/* /usr/local/bin
 
-RUN touch /var/log/cron.log \
-    && chown www-data /var/log/cron.log
-
 USER www-data
 RUN crontab /app/cron-wordpress
 
